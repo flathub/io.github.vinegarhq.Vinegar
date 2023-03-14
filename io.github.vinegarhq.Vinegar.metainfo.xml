@@ -23,6 +23,7 @@
 	  </screenshot>
 	</screenshots>
 	<releases>
+		<release version="8.0" date="2023-01-24"/>
 		<release version="2.3.2" date="2023-3-12">
 			<description>
 				<p>Initial Flatpak Release</p>
