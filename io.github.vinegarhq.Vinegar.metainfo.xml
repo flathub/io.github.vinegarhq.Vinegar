@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright [2022] [Vinegar Development] -->
-<component type="desktop-application">
+<component type="console-application">
 	<id>io.github.vinegarhq.Vinegar</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<name>Vinegar</name>
