@@ -102,7 +102,8 @@ modules:
     build-commands:
       - make install GO=$GOROOT/bin/go PREFIX=/app 
       - install -Dm644 io.github.vinegarhq.Vinegar.metainfo.xml -t /app/share/metainfo
-      - install -Dm644 catglass.svg /app/share/icons/hicolor/scalable/apps/io.github.vinegarhq.Vinegar.svg 
+      - install -Dm644 catglass.svg /app/share/icons/hicolor/scalable/apps/io.github.vinegarhq.Vinegar.svg
+      - install -Dm644 io.github.vinegarhq.Vinegar.png /app/share/icons/hicolor/128x128/apps/io.github.vinegarhq.Vinegar.png
     sources:
       - type: git
         url: https://github.com/vinegarhq/vinegar.git
@@ -112,6 +113,8 @@ modules:
         path: io.github.vinegarhq.Vinegar.metainfo.xml
       - type: file
         path: catglass.svg
+      - type: file
+        path: io.github.vinegarhq.Vinegar.png
 
 # ABOVE FOR VINEGAR, BELOW FOR WINE-STAGING
 # Multilib deps
