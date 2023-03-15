@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright [2022] [Vinegar Development] -->
-<component type="console-application">
+<component type="desktop-application">
 	<id>io.github.vinegarhq.Vinegar</id>
-	<icon type="local">/app/share/icons/hicolor/scalable/apps/io.github.vinegarhq.Vinegar.svg</icon>
 	<metadata_license>CC0-1.0</metadata_license>
 	<name>Vinegar</name>
 	<summary>A wrapper for Roblox with many advanced optimization features.</summary>
