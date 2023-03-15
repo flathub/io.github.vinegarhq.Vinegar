@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright [2022] [Vinegar Development] -->
-<component type="desktop-application">
+<component type="console-application">
 	<id>io.github.vinegarhq.Vinegar</id>
+	<icon type="local">/app/share/icons/hicolor/scalable/apps/io.github.vinegarhq.Vinegar.svg</icon>
 	<metadata_license>CC0-1.0</metadata_license>
 	<name>Vinegar</name>
-	<icon type="remote">https://vinegarhq.github.io/catglass.svg</icon>
 	<summary>A wrapper for Roblox with many advanced optimization features.</summary>
 	<description>
 		<p>Vinegar is a wrapper for Roblox that includes various optimization and ease-of-use features, including the RCO FFlag set, fast launching, and more.</p>
@@ -18,8 +18,8 @@
 	<developer_name>Vinegar Development</developer_name>
 	<screenshots>
 	  <screenshot type="default">
+	    <image type="source" width="1116" height="606">https://vinegarhq.github.io/image.png</image>
 			<caption>Vinegar gameplay of Phantom Forces, an experience on Roblox</caption>
-			<image type="source" width="1116" height="606">https://vinegarhq.github.io/image.png</image>
 	  </screenshot>
 	</screenshots>
 	<releases>

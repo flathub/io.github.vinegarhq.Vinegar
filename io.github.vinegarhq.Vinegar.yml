@@ -102,14 +102,8 @@ modules:
     build-commands:
       - make install GO=$GOROOT/bin/go PREFIX=/app 
       - install -Dm644 io.github.vinegarhq.Vinegar.metainfo.xml -t /app/share/metainfo
-        # Required for appstream
-      - |
-        icondir=${FLATPAK_DEST}/share/icons/hicolor
-        install -Dm644 catglass.svg ${icondir}/scalable/apps/io.github.vinegarhq.Vinegar.svg 
-        for s in 64 128 256; do
-          mkdir -p ${icondir}/${s}x${s}/apps
-          rsvg-convert -h ${s} -a -o ${icondir}/${s}x${s}/apps/io.github.vinegarhq.Vinegar.png ${icondir}/scalable/apps/io.github.vinegarhq.Vinegar.svg 
-        done
+      - install -Dm644 catglass.svg /app/share/icons/hicolor/scalable/apps/io.github.vinegarhq.Vinegar.svg
+      - install -Dm644 io.github.vinegarhq.Vinegar.png /app/share/icons/hicolor/128x128/apps/io.github.vinegarhq.Vinegar.png
     sources:
       - type: git
         url: https://github.com/vinegarhq/vinegar.git
@@ -119,6 +113,8 @@ modules:
         path: io.github.vinegarhq.Vinegar.metainfo.xml
       - type: file
         path: catglass.svg
+      - type: file
+        path: io.github.vinegarhq.Vinegar.png
 
 # ABOVE FOR VINEGAR, BELOW FOR WINE-STAGING
 # Multilib deps
@@ -200,12 +196,6 @@ modules:
         sha256: 410269000292c3bfadd2561fdde06d9bcb2bc958b49b03e963f14177a27631f0
         x-addons-url: &wine-addons-url >-
           https://source.winehq.org/git/wine.git/blob_plain/refs/heads/stable:/dlls/appwiz.cpl/addons.c
-        x-checker-data:
-          type: html
-          url: https://source.winehq.org/git/wine.git/blob_plain/refs/heads/stable:/VERSION
-          version-pattern: Wine version (\d[\d\w\.-]+\d)
-          url-template: https://dl.winehq.org/wine/source/$major.$minor/wine-$version.tar.xz
-          is-main-source: true
       - type: patch
         paths:
           - patches/wine/loader-prefer-winedllpath.patch
