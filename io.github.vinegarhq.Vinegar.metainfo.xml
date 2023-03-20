@@ -11,8 +11,8 @@
 	<categories>
 		<category>Game</category>
 	</categories>
-	<url type="homepage">https://github.com/vinegar-dev/vinegar</url>
-	<url type="bugtracker">https://github.com/flathub/com.github.vinegar/issues</url>
+	<url type="homepage">https://github.com/vinegarhq/vinegar</url>
+	<url type="bugtracker">https://github.com/vinegarhq/vinegar/issues</url>
 	<project_license>GPL-3.0-only</project_license>
 	<developer_name>Vinegar Development</developer_name>
 	<screenshots>
