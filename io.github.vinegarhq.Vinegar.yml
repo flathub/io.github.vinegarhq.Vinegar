@@ -10,7 +10,7 @@ sdk-extensions:
   - org.freedesktop.Sdk.Extension.golang
   - org.freedesktop.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
-  - org.freedesktop.Sdk.Extension.mingw-w64 
+  - org.freedesktop.Sdk.Extension.mingw-w64
 command: vinegar
 
 finish-args:
@@ -100,7 +100,7 @@ modules:
   - name: vinegar
     buildsystem: simple
     build-commands:
-      - make install GO=$GOROOT/bin/go PREFIX=/app 
+      - make install GO=$GOROOT/bin/go PREFIX=/app
       - install -Dm644 io.github.vinegarhq.Vinegar.desktop -t /app/share/applications
       - install -Dm644 io.github.vinegarhq.Vinegar.metainfo.xml -t /app/share/metainfo
       - install -Dm644 catglass.svg /app/share/icons/hicolor/scalable/apps/io.github.vinegarhq.Vinegar.svg
@@ -125,8 +125,8 @@ modules:
   - name: libusb
     sources: &libusb-sources
       - type: archive
-        url: https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2
-        sha256: 12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5
+        url: https://github.com/libusb/libusb/releases/download/v1.0.25/libusb-1.0.25.tar.bz2
+        sha256: 8a28ef197a797ebac2702f095e81975e2b02b2eeff2774fa909c78a74ef50849
         x-checker-data:
           type: json
           url: https://api.github.com/repos/libusb/libusb/releases/latest
@@ -195,7 +195,7 @@ modules:
       - INSTALL_PROGRAM_FLAGS=-s
     sources: &wine-sources
       - type: archive
-        url: https://dl.winehq.org/wine/source/8.x/wine-8.4.tar.xz 
+        url: https://dl.winehq.org/wine/source/8.x/wine-8.4.tar.xz
         sha256: 0459a462ea83705ada35ed5da71b61c73586dad59d18cdc528f0408a456cfbe0
         x-addons-url: &wine-addons-url >-
           https://source.winehq.org/git/wine.git/blob_plain/refs/heads/stable:/dlls/appwiz.cpl/addons.c
