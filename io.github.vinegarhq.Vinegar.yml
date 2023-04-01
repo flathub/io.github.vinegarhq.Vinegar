@@ -196,13 +196,20 @@ modules:
       - INSTALL_PROGRAM_FLAGS=-s
     sources: &wine-sources
       - type: archive
-        url: https://dl.winehq.org/wine/source/8.x/wine-8.4.tar.xz 
-        sha256: 0459a462ea83705ada35ed5da71b61c73586dad59d18cdc528f0408a456cfbe0
+        url: https://dl.winehq.org/wine/source/8.x/wine-8.5.tar.xz 
+        sha256: c09766401b30bb425e132e114b26dafa4276497e40ccbe15fb77e751fb09be17
         x-addons-url: &wine-addons-url >-
           https://source.winehq.org/git/wine.git/blob_plain/refs/heads/stable:/dlls/appwiz.cpl/addons.c
+      - type: git
+        url: https://gitlab.winehq.org/wine/wine-staging.git
+        commit: abe75a77419afe2d4fca2a894cafba9006625cf0
+        tag: v8.5
       - type: patch
         paths:
           - patches/wine/loader-prefer-winedllpath.patch
+      - type: shell
+        commands:
+          - staging/patchinstall.py --destdir=. --all
 
   # 32-bit compatibility build
 
