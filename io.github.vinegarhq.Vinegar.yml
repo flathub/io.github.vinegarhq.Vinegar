@@ -143,9 +143,9 @@ modules:
       arch:
         x86_64: *compat_i386_opts
     buildsystem: meson
-      config-opts:
-        - -Dwith-sd-bus-provider=no-daemon
-        - -Dwith-examples=false
+    config-opts:
+      - -Dwith-sd-bus-provider=no-daemon
+      - -Dwith-examples=false
     sources: *gamemode-sources
 
   # TODO ADD 32BIT GAMEMODE
