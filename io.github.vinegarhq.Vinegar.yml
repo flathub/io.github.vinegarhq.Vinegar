@@ -119,7 +119,36 @@ modules:
         path: io.github.vinegarhq.Vinegar.png
       - type: file
         path: patches/io.github.vinegarhq.Vinegar.desktop
+  - name: gamemode # Pillaged from com.valvesoftware.Steam
+    buildsystem: meson
+    config-opts:
+      - -Dwith-sd-bus-provider=no-daemon
+      - -DWith-examples=false
+    sources: &gamemode-sources
+      - type: git
+        url: https://github.com/FeralInteractive/gamemode
+        commit: 4dc99dff76218718763a6b07fc1900fa6d1dafd9
+        tag: 1.7
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/FeralInteractive/gamemode/releases/latest
+          tag-query: .tag_name
+  - name: gamemoderun
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 data/gamemoderun -t /app/bin
+    sources: *gamemode-sources
+  - name: gamemode-32bit
+    build-options:
+      arch:
+        x86_64: *compat_i386_opts
+    buildsystem: meson
+      config-opts:
+        - -Dwith-sd-bus-provider=no-daemon
+        - -Dwith-examples=false
+    sources: *gamemode-sources
 
+  # TODO ADD 32BIT GAMEMODE
 # ABOVE FOR VINEGAR, BELOW FOR WINE-STAGING
 # Multilib deps
 
