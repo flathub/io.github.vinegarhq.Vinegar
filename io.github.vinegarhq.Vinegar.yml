@@ -10,7 +10,7 @@ sdk-extensions:
   - org.freedesktop.Sdk.Extension.golang
   - org.freedesktop.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
-  - org.freedesktop.Sdk.Extension.mingw-w64 
+  - org.freedesktop.Sdk.Extension.mingw-w64
 command: vinegar
 
 finish-args:
@@ -101,7 +101,7 @@ modules:
   - name: vinegar
     buildsystem: simple
     build-commands:
-      - make install GO=$GOROOT/bin/go PREFIX=/app 
+      - make install GO=$GOROOT/bin/go PREFIX=/app
       - install -Dm644 io.github.vinegarhq.Vinegar.desktop -t /app/share/applications
       - install -Dm644 io.github.vinegarhq.Vinegar.metainfo.xml -t /app/share/metainfo
       - install -Dm644 catglass.svg /app/share/icons/hicolor/scalable/apps/io.github.vinegarhq.Vinegar.svg
@@ -128,7 +128,7 @@ modules:
       - type: git
         url: https://github.com/FeralInteractive/gamemode
         commit: 4dc99dff76218718763a6b07fc1900fa6d1dafd9
-        tag: 1.7
+        tag: '1.7'
         x-checker-data:
           type: json
           url: https://api.github.com/repos/FeralInteractive/gamemode/releases/latest
@@ -225,7 +225,7 @@ modules:
       - INSTALL_PROGRAM_FLAGS=-s
     sources: &wine-sources
       - type: archive
-        url: https://dl.winehq.org/wine/source/8.x/wine-8.5.tar.xz 
+        url: https://dl.winehq.org/wine/source/8.x/wine-8.5.tar.xz
         sha256: c09766401b30bb425e132e114b26dafa4276497e40ccbe15fb77e751fb09be17
         x-addons-url: &wine-addons-url >-
           https://source.winehq.org/git/wine.git/blob_plain/refs/heads/stable:/dlls/appwiz.cpl/addons.c
