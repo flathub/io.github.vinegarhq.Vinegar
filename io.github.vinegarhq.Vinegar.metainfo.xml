@@ -22,9 +22,9 @@
 	  </screenshot>
 	</screenshots>
 	<releases>
-		<release version="2.3.4" date="2023-3-12">
+		<release version="1.1.2" date="2023-8-20">
 			<description>
-				<p>2.3.4: DXVK tarball caching and Roblox Studio bugfix.</p>
+				<p>Vinegar rewrite and Byfron Hyperion support.</p>
 			</description>
 		</release>
 	</releases>
