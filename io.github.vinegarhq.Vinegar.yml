@@ -109,8 +109,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/vinegarhq/vinegar.git
-        tag: v1.0.1
-        commit: a9957528e5f054bea5bc9d45a6d9ac10ad592b9b
+        tag: v1.1.2
+        commit: 4080aa797daab64303df0706b1f29cba30e76001 
       - type: file
         path: io.github.vinegarhq.Vinegar.metainfo.xml
       - type: file
