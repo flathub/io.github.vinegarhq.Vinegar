@@ -231,7 +231,7 @@ modules:
           https://source.winehq.org/git/wine.git/blob_plain/refs/heads/stable:/dlls/appwiz.cpl/addons.c
       - type: git
         url: https://gitlab.winehq.org/wine/wine-staging.git
-        commit: abe75a77419afe2d4fca2a894cafba9006625cf0
+        commit: da76250fadbcbc428d4fd20858b934d1b9593156
         tag: v8.14
       - type: patch
         paths:
