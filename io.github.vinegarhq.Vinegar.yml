@@ -43,8 +43,8 @@ add-extensions:
     merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d;vulkan/implicit_layer.d
     download-if: active-gl-driver
     enable-if: active-gl-driver
-  org.hq..gecko:
-    directory: share//gecko
+  org.winehq.Wine.gecko:
+    directory: share/wine/gecko
   org.winehq.Wine.mono:
     directory: share/wine/mono
 
