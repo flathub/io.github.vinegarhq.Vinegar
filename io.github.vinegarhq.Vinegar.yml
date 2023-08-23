@@ -225,14 +225,14 @@ modules:
       - INSTALL_PROGRAM_FLAGS=-s
     sources: &wine-sources
       - type: archive
-        url: https://dl.winehq.org/wine/source/8.x/wine-8.14.tar.xz 
-        sha256: e1836ef66b1825fa9da042830c0495b2ac394815443643466979ee89fdd7faf4
+        url: https://dl.winehq.org/wine/source/8.x/wine-8.13.tar.xz 
+        sha256: 26e5d3a83d25c5418c6c0f5448e443d208763a2643aab4b0f1ad352922a4c275
         x-addons-url: &wine-addons-url >-
           https://source.winehq.org/git/wine.git/blob_plain/refs/heads/stable:/dlls/appwiz.cpl/addons.c
       - type: git
         url: https://gitlab.winehq.org/wine/wine-staging.git
-        commit: da76250fadbcbc428d4fd20858b934d1b9593156
-        tag: v8.14
+        commit: 1942fb8bc1323cfeb167bbf75f049065107c78c7
+        tag: v8.13
       - type: patch
         paths:
           - patches/wine/loader-prefer-winedllpath.patch
