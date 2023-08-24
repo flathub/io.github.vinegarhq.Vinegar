@@ -261,12 +261,12 @@ modules:
       - /bin32
 
      # Modified from org.winehq.Wine
-   - name: wine-mono
-     buildsystem: simple
-     build-commands:
+  - name: wine-mono
+    buildsystem: simple
+    build-commands:
       - mkdir -p ${FLATPAK_DEST}/share/wine/mono/
       - cp -a wine-mono-* ${FLATPAK_DEST}/share/wine/mono/
-     sources:
+    sources:
       - type: archive
         url: https://dl.winehq.org/wine/wine-mono/7.4.0/wine-mono-7.4.0-x86.tar.xz
         strip-components: 0
