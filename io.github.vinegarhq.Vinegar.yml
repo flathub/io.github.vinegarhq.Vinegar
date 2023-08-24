@@ -174,7 +174,7 @@ modules:
           - udevadm hwdb --update --usr
         sources: &eudev-sources
           - type: archive
-            url: https://github.com/eudev-project/eudev/releases/download/v3.2.11/eudev-3.2.12.tar.gz
+            url: https://github.com/eudev-project/eudev/releases/download/v3.2.12/eudev-3.2.12.tar.gz
             sha256: ccdd64ec3c381d3c3ed0e99d2e70d1f62988c7763de89ca7bdffafa5eacb9ad8
             x-checker-data:
               type: json
