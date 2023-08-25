@@ -209,6 +209,8 @@ modules:
             - --with-mingw=ccache x86_64-w64-mingw32-gcc
           libdir: /app/lib
       env:
+        CFLAGS: -mno-avx
+        CXXFLAGS: -mno-avx
         LIBDIR: lib
     config-opts: &wine-config-opts
       - --disable-win16
@@ -251,6 +253,8 @@ modules:
         - --bindir=${FLATPAK_DEST}/bin32
         - --with-mingw=ccache i686-w64-mingw32-gcc
       env:
+        CFLAGS: -mno-avx
+        CXXFLAGS: -mno-avx
         LIBDIR: lib32
     config-opts: *wine-config-opts
     make-install-args: *wine-make-install-args
