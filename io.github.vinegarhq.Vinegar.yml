@@ -249,8 +249,8 @@ modules:
       #    - patches/wine/childwindow.patch
       # REMOVE BELOW PATCH AFTER MERGE INTO MASTER
       - type: patch
-        url: https://gitlab.winehq.org/wine/wine/-/commit/a6fdae9a306363ec670bc5b49773e67c045e5e9d.patchi
-        sha256: f85f57c239c8b0777c346ef52db17c4f77fcbc7f0e6888b7b37e19bcc3f2ddc2
+        paths:
+          - patches/wine/fixcalculation.patch
       - type: patch
         paths:
           - patches/wine/loader-prefer-winedllpath.patch
