@@ -236,17 +236,21 @@ modules:
       - INSTALL_PROGRAM_FLAGS=-s
     sources: &wine-sources
       - type: archive
-        url: https://dl.winehq.org/wine/source/8.x/wine-8.9.tar.xz
-        sha256: 8cdf86b250d9080fcd4e3b939680fcd38ebf0f274a7afa2dcc65f74fa2c1b320
+        url: https://dl.winehq.org/wine/source/8.x/wine-8.15.tar.xz
+        sha256: ed8fae61784bca6475accc78eff26a9ec6b08001a7ae1698d52e25f9c2d422da
         x-addons-url: &wine-addons-url >-
           https://source.winehq.org/git/wine.git/blob_plain/refs/heads/stable:/dlls/appwiz.cpl/addons.c
       - type: git
         url: https://gitlab.winehq.org/wine/wine-staging.git
-        commit: f8cc3baab3dddb23c91c24a3b98fae75855c496f
-        tag: v8.9
+        commit: 7f7f0fc98d2a3f0ac639143826daf35399fe7863
+        tag: v8.15
       #- type: patch
       #  paths:
       #    - patches/wine/childwindow.patch
+      # REMOVE BELOW PATCH AFTER MERGE INTO MASTER
+      - type: patch
+        url: https://gitlab.winehq.org/wine/wine/-/commit/a6fdae9a306363ec670bc5b49773e67c045e5e9d.patchi
+        sha256: f85f57c239c8b0777c346ef52db17c4f77fcbc7f0e6888b7b37e19bcc3f2ddc2
       - type: patch
         paths:
           - patches/wine/loader-prefer-winedllpath.patch
