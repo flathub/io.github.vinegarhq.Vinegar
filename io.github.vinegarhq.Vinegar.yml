@@ -128,7 +128,14 @@ modules:
       - -Dwith-sd-bus-provider=no-daemon
       - -Dwith-examples=false
     sources: &gamemode-sources
-      - sources/gamemode-git.json
+      - type: git
+        url: https://github.com/FeralInteractive/gamemode
+        commit: 4dc99dff76218718763a6b07fc1900fa6d1dafd9
+        tag: '1.7'
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/FeralInteractive/gamemode/releases/latest
+          tag-query: .tag_name
       - type: patch
         path: patches/gamemode-pidfd-open.patch
         use-git: true
