@@ -2,9 +2,9 @@
 
 app-id: io.github.vinegarhq.Vinegar
 runtime: org.freedesktop.Platform
-runtime-version: '22.08'
+runtime-version: '23.08'
 x-gl-version: &gl-version '1.4'
-x-gl-versions: &gl-versions 22.08;1.4
+x-gl-versions: &gl-versions 23.08;1.4
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.golang
@@ -32,11 +32,11 @@ finish-args:
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '22.08'
+    version: '23.08'
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
     version: '1.4'
-    versions: 22.08;1.4
+    versions: 23.08;1.4
     subdirectories: true
     no-autodownload: true
     autodelete: false
@@ -122,7 +122,7 @@ modules:
         path: io.github.vinegarhq.Vinegar.png
       - type: file
         path: patches/io.github.vinegarhq.Vinegar.desktop
-  - name: gamemode # Pillaged from com.valvesoftware.Steam
+  - name: gamemode
     buildsystem: meson
     config-opts:
       - -Dwith-sd-bus-provider=no-daemon
@@ -136,11 +136,9 @@ modules:
           type: json
           url: https://api.github.com/repos/FeralInteractive/gamemode/releases/latest
           tag-query: .tag_name
-  - name: gamemoderun
-    buildsystem: simple
-    build-commands:
-      - install -Dm755 data/gamemoderun -t /app/bin
-    sources: *gamemode-sources
+      - type: patch
+        path: patches/gamemode-pidfd-open.patch
+        use-git: true
   - name: gamemode-32bit
     build-options:
       arch:
@@ -149,6 +147,11 @@ modules:
     config-opts:
       - -Dwith-sd-bus-provider=no-daemon
       - -Dwith-examples=false
+    sources: *gamemode-sources
+  - name: gamemoderun
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 data/gamemoderun -t /app/bin
     sources: *gamemode-sources
 
 # ABOVE FOR VINEGAR, BELOW FOR WINE-STAGING
@@ -200,11 +203,28 @@ modules:
         cleanup: *eudev-cleanup
         sources: *eudev-sources
 
+
   - name: vkd3d
     sources: &vkd3d-sources
       - type: archive
         url: https://dl.winehq.org/vkd3d/source/vkd3d-1.8.tar.xz
         sha256: e0cec19cc9535715c72ec3a16cdec29dc14d5ccec73526387b5843cf75628ac5
+    modules:
+      - name: spirv-deps
+        buildsystem: cmake-ninja
+        builddir: true
+        config-opts:
+          - -DSPIRV_SKIP_EXECUTABLES=ON
+        cleanup: 
+          - /bin
+        sources:
+          - type: git
+            url: https://github.com/KhronosGroup/SPIRV-Headers.git
+            tag: sdk-1.3.250.1
+            commit: 268a061764ee69f09a477a695bf6a11ffe311b8d
+            x-checker-data:
+              type: git
+              tag-pattern: ^sdk-([\d.]+)$
 
   - name: vkd3d-32bit
     build-options:
@@ -291,4 +311,3 @@ modules:
         strip-components: 0
         sha256: 14c7d76780b79dc62d8ed9d1759e7adcfa332bb2406e2e694dee7b2128cc7a77
         # no x-checker because Wine version and Wine Mono version have to be synced together.
-
