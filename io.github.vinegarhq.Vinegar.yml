@@ -275,6 +275,9 @@ modules:
       - type: patch
         paths:
           - patches/wine/loader-prefer-winedllpath.patch
+      - type: patch
+        paths:
+          - patches/wine/winedebuggerwindow.patch
       - type: shell
         commands:
           - staging/patchinstall.py --destdir=. --all

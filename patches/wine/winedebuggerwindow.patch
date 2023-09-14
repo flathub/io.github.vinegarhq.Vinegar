@@ -1,0 +1,13 @@
+diff --git a/programs/conhost/window.c b/programs/conhost/window.c
+index 043ecd5510f..1a135fe9095 100644
+--- a/programs/conhost/window.c
++++ b/programs/conhost/window.c
+@@ -1697,7 +1697,7 @@ static INT_PTR WINAPI config_dialog_proc( HWND dialog, UINT msg, WPARAM wparam,
+         SendMessageW( GetDlgItem(dialog, IDC_CNF_SB_HEIGHT_UD),  UDM_SETRANGE, 0, MAKELPARAM(max_ud, 0));
+         SendMessageW( GetDlgItem(dialog, IDC_CNF_SB_WIDTH_UD),   UDM_SETRANGE, 0, MAKELPARAM(max_ud, 0));
+ 
+-        SendDlgItemMessageW( dialog, IDC_CNF_CLOSE_EXIT, BM_SETCHECK, BST_CHECKED, 0 );
++        SendDlgItemMessageW( dialog, IDC_CNF_CLOSE_EXIT, BM_SETCHECK, BST_UNCHECKED, 0 );
+ 
+         SendDlgItemMessageW( dialog, IDC_CNF_EDITION_MODE, CB_ADDSTRING, 0, (LPARAM)L"Win32" );
+         SendDlgItemMessageW( dialog, IDC_CNF_EDITION_MODE, CB_ADDSTRING, 0, (LPARAM)L"Emacs" );
