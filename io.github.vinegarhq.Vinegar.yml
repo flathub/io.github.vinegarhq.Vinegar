@@ -256,14 +256,16 @@ modules:
       - INSTALL_PROGRAM_FLAGS=-s
     sources: &wine-sources
       - type: archive
-        url: https://dl.winehq.org/wine/source/8.x/wine-8.15.tar.xz
-        sha256: ed8fae61784bca6475accc78eff26a9ec6b08001a7ae1698d52e25f9c2d422da
+        url: https://dl.winehq.org/wine/source/8.x/wine-8.16.tar.xz
+        sha256: 168266375eef23394a3147e84b41b4297fb80363db0a07921a5ed087a9c3f3fd
         x-addons-url: &wine-addons-url >-
           https://source.winehq.org/git/wine.git/blob_plain/refs/heads/stable:/dlls/appwiz.cpl/addons.c
-      - type: git
-        url: https://gitlab.winehq.org/wine/wine-staging.git
-        commit: 7f7f0fc98d2a3f0ac639143826daf35399fe7863
-        tag: v8.15
+      #- type: git
+      #  url: https://gitlab.winehq.org/wine/wine-staging.git
+      #  commit: 7f7f0fc98d2a3f0ac639143826daf35399fe7863
+      #  tag: v8.15
+      #reenable when 8.16 available
+      
       #- type: patch
       #  paths:
       #    - patches/wine/childwindow.patch
@@ -274,9 +276,9 @@ modules:
       - type: patch
         paths:
           - patches/wine/loader-prefer-winedllpath.patch
-      - type: shell
-        commands:
-          - staging/patchinstall.py --destdir=. --all
+      #- type: shell
+      #  commands:
+      #    - staging/patchinstall.py --destdir=. --all
 
   # 32-bit compatibility build
 
