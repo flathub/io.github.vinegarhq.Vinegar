@@ -263,9 +263,6 @@ modules:
         url: https://gitlab.winehq.org/wine/wine-staging.git
         commit: 7f7f0fc98d2a3f0ac639143826daf35399fe7863
         tag: v8.15
-      - type: patch
-        paths:
-          - patches/wine/childwindow.patch
       # REMOVE BELOW PATCH AFTER MERGE INTO 8.16
       - type: patch
         paths:
@@ -276,6 +273,9 @@ modules:
       - type: shell
         commands:
           - staging/patchinstall.py --destdir=. --all
+      - type: patch
+        paths:
+          - patches/wine/childwindow.patch
 
   # 32-bit compatibility build
 
