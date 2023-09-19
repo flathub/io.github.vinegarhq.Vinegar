@@ -1,0 +1,34 @@
+diff --git a/dlls/user32/sysparams.c b/dlls/user32/sysparams.c
+index 5ededfee62a..5c6814246c4 100644
+--- a/dlls/user32/sysparams.c
++++ b/dlls/user32/sysparams.c
+@@ -696,11 +696,12 @@ BOOL WINAPI IsProcessDPIAware(void)
+ /**********************************************************************
+  *              EnableNonClientDpiScaling   (USER32.@)
+  */
+-BOOL WINAPI EnableNonClientDpiScaling( HWND hwnd )
++INT WINAPI EnableNonClientDpiScaling( HWND hwnd )
+ {
+-    FIXME("(%p): stub\n", hwnd);
+-    SetLastError( ERROR_CALL_NOT_IMPLEMENTED );
+-    return FALSE;
++    //FIXME("(%p): stub\n", hwnd);
++    //SetLastError( ERROR_CALL_NOT_IMPLEMENTED );
++    //This is just a hack!!!
++    return 0;
+ }
+ 
+ /***********************************************************************
+diff --git a/include/winuser.h b/include/winuser.h
+index 4ed29e86616..f9b9aa70eef 100644
+--- a/include/winuser.h
++++ b/include/winuser.h
+@@ -4073,7 +4073,7 @@ WINUSERAPI BOOL        WINAPI EmptyClipboard(void);
+ WINUSERAPI BOOL        WINAPI EnableMenuItem(HMENU,UINT,UINT);
+ WINUSERAPI BOOL        WINAPI EnableMouseInPointer(BOOL);
+ WINUSERAPI BOOL        WINAPI EnableMouseInPointerForThread(VOID);
+-WINUSERAPI BOOL        WINAPI EnableNonClientDpiScaling(HWND);
++WINUSERAPI INT        WINAPI EnableNonClientDpiScaling(HWND);
+ WINUSERAPI BOOL        WINAPI EnableScrollBar(HWND,UINT,UINT);
+ WINUSERAPI BOOL        WINAPI EnableWindow(HWND,BOOL);
+ WINUSERAPI BOOL        WINAPI EndDeferWindowPos(HDWP);
