@@ -248,7 +248,6 @@ modules:
       - --with-x
       - --with-pulse
       - --with-dbus
-      - --without-hal
       - --without-oss
     make-install-args: &wine-make-install-args
       - LDCONFIG=/bin/true
@@ -264,10 +263,7 @@ modules:
         url: https://gitlab.winehq.org/wine/wine-staging.git
         commit: 7f7f0fc98d2a3f0ac639143826daf35399fe7863
         tag: v8.15
-      #- type: patch
-      #  paths:
-      #    - patches/wine/childwindow.patch
-      # REMOVE BELOW PATCH AFTER MERGE INTO MASTER
+      # REMOVE BELOW PATCH AFTER MERGE INTO 8.16
       - type: patch
         paths:
           - patches/wine/fixcalculation.patch
@@ -277,6 +273,9 @@ modules:
       - type: shell
         commands:
           - staging/patchinstall.py --destdir=. --all
+      - type: patch
+        paths:
+          - patches/wine/childwindow.patch
 
   # 32-bit compatibility build
 
