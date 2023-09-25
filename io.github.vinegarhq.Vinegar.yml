@@ -112,8 +112,7 @@ modules:
     sources:
       - type: archive
         url: https://github.com/vinegarhq/vinegar/releases/download/v1.4.3/vinegar-v1.4.3.tar.xz
-        sha256sum: 634f0d49e5bf41914e858d5189262d3954376622f196ff00a85fa789c2d333f7
-        commit: 78bcfcb8768bbdfbed27eaf8fcb3daa727acde0b
+        sha256: 634f0d49e5bf41914e858d5189262d3954376622f196ff00a85fa789c2d333f7
       - type: file
         path: io.github.vinegarhq.Vinegar.metainfo.xml
       - type: file
