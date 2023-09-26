@@ -104,7 +104,7 @@ modules:
   - name: vinegar
     buildsystem: simple
     build-commands:
-      - cd vinegar-v*
+      - cd vinegar-v1.4.3
       - make install GO=$GOROOT/bin/go PREFIX=/app
       - install -Dm644 io.github.vinegarhq.Vinegar.desktop -t /app/share/applications
       - install -Dm644 io.github.vinegarhq.Vinegar.metainfo.xml -t /app/share/metainfo
