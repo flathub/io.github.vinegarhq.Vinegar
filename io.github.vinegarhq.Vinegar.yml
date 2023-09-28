@@ -110,10 +110,9 @@ modules:
       - install -Dm644 catglass.svg /app/share/icons/hicolor/scalable/apps/io.github.vinegarhq.Vinegar.svg
       - install -Dm644 io.github.vinegarhq.Vinegar.png /app/share/icons/hicolor/128x128/apps/io.github.vinegarhq.Vinegar.png
     sources:
-      - type: git
-        url: https://github.com/vinegarhq/vinegar.git
-        tag: v1.4.2
-        commit: 78bcfcb8768bbdfbed27eaf8fcb3daa727acde0b
+      - type: archive
+        url: https://github.com/vinegarhq/vinegar/releases/download/v1.4.5/vinegar-v1.4.5.tar.xz
+        sha256: 8fc9415604d2a249618711e844984b422e866b14823c47907fffb1071330c5ae 
       - type: file
         path: io.github.vinegarhq.Vinegar.metainfo.xml
       - type: file

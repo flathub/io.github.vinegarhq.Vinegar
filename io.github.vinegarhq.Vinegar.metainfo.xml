@@ -22,9 +22,9 @@
 	  </screenshot>
 	</screenshots>
 	<releases>
-		<release version="1.4.1" date="2023-8-22">
+		<release version="1.4.3" date="2023-9-25">
 			<description>
-				<p>New wine and go module fix.</p>
+				<p>Update to 1.4.3.</p>
 			</description>
 		</release>
 	</releases>
