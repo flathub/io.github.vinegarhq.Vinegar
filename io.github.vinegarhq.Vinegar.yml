@@ -254,15 +254,18 @@ modules:
       - INSTALL_PROGRAM_FLAGS=-s
     sources: &wine-sources
       - type: archive
-        url: https://dl.winehq.org/wine/source/8.x/wine-8.15.tar.xz
-        sha256: ed8fae61784bca6475accc78eff26a9ec6b08001a7ae1698d52e25f9c2d422da
+        url: https://dl.winehq.org/wine/source/8.x/wine-8.17.tar.xz
+        sha256: f01785bd3162c74e65deb13aa0add711e37c484454719bedd0e8c2b1a3469b7e
         x-addons-url: &wine-addons-url >-
           https://source.winehq.org/git/wine.git/blob_plain/refs/heads/stable:/dlls/appwiz.cpl/addons.c
       - type: git
         url: https://gitlab.winehq.org/wine/wine-staging.git
-        commit: 7f7f0fc98d2a3f0ac639143826daf35399fe7863
-        tag: v8.15
+        commit: 2827fd672724b2bd50238aea381c74a241bc88c1
+        tag: v8.17.1
       # REMOVE BELOW PATCH AFTER MERGE INTO 8.16
+      - type: patch
+        paths:
+          - patches/wine/segregrevert.patch
       - type: patch
         paths:
           - patches/wine/fixcalculation.patch
