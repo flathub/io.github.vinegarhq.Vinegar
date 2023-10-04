@@ -265,9 +265,9 @@ modules:
       - type: patch
         paths:
           - patches/wine/segregrevert.patch
-      - type: patch
-        paths:
-          - patches/wine/fixcalculation.patch
+            #- type: patch
+            #paths:
+            #- patches/wine/fixcalculation.patch
       - type: patch
         paths:
           - patches/wine/loader-prefer-winedllpath.patch
