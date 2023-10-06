@@ -99,10 +99,35 @@ index 6164c799ba1..fbba69dbfbc 100644
  
      /* AMD CPUs don't save the opcode or data pointer if no exception is
 diff --git a/dlls/ntdll/unix/signal_x86_64.c b/dlls/ntdll/unix/signal_x86_64.c
-index 79d69d11547..3b3c63c9f90 100644
+index 79d69d11547..48a81cc5c9a 100644
 --- a/dlls/ntdll/unix/signal_x86_64.c
 +++ b/dlls/ntdll/unix/signal_x86_64.c
-@@ -789,7 +789,17 @@ static inline void set_sigcontext( const CONTEXT *context, ucontext_t *sigcontex
+@@ -394,16 +394,20 @@ struct syscall_frame
+     ULONG64               r14;           /* 0060 */
+     ULONG64               r15;           /* 0068 */
+     ULONG64               rip;           /* 0070 */
+-    ULONG64               cs;            /* 0078 */
++    WORD                  cs;            /* 0078 */
++    WORD                  ds;            /* 007a */
++    WORD                  es;            /* 007c */
++    WORD                  fs;            /* 007e */
+     ULONG64               eflags;        /* 0080 */
+     ULONG64               rsp;           /* 0088 */
+-    ULONG64               ss;            /* 0090 */
++    WORD                  ss;            /* 0090 */
++    WORD                  gs;            /* 0092 */
++    DWORD                 restore_flags; /* 0094 */
+     ULONG64               rbp;           /* 0098 */
+     struct syscall_frame *prev_frame;    /* 00a0 */
+     SYSTEM_SERVICE_TABLE *syscall_table; /* 00a8 */
+     DWORD                 syscall_flags; /* 00b0 */
+-    DWORD                 restore_flags; /* 00b4 */
+-    DWORD                 align[2];      /* 00b8 */
++    DWORD                 align[3];      /* 00b4 */
+     XMM_SAVE_AREA32       xsave;         /* 00c0 */
+     DECLSPEC_ALIGN(64) XSTATE xstate;    /* 02c0 */
+ };
+@@ -789,7 +793,17 @@ static inline void set_sigcontext( const CONTEXT *context, ucontext_t *sigcontex
      RIP_sig(sigcontext) = context->Rip;
      CS_sig(sigcontext)  = context->SegCs;
      FS_sig(sigcontext)  = context->SegFs;
@@ -120,7 +145,7 @@ index 79d69d11547..3b3c63c9f90 100644
  }
  
  
-@@ -818,16 +828,6 @@ static inline void leave_handler( ucontext_t *sigcontext )
+@@ -818,16 +832,6 @@ static inline void leave_handler( ucontext_t *sigcontext )
      if (fs32_sel && !is_inside_signal_stack( (void *)RSP_sig(sigcontext )) && !is_inside_syscall(sigcontext))
          __asm__ volatile( "movw %0,%%fs" :: "r" (fs32_sel) );
  #endif
@@ -137,7 +162,7 @@ index 79d69d11547..3b3c63c9f90 100644
  }
  
  
-@@ -860,11 +860,23 @@ static void save_context( struct xcontext *xcontext, const ucontext_t *sigcontex
+@@ -860,11 +864,23 @@ static void save_context( struct xcontext *xcontext, const ucontext_t *sigcontex
      context->Rip    = RIP_sig(sigcontext);
      context->SegCs  = CS_sig(sigcontext);
      context->SegFs  = FS_sig(sigcontext);
@@ -165,7 +190,7 @@ index 79d69d11547..3b3c63c9f90 100644
      context->Dr0    = amd64_thread_data()->dr0;
      context->Dr1    = amd64_thread_data()->dr1;
      context->Dr2    = amd64_thread_data()->dr2;
-@@ -1021,6 +1033,15 @@ NTSTATUS WINAPI NtSetContextThread( HANDLE handle, const CONTEXT *context )
+@@ -1021,6 +1037,15 @@ NTSTATUS WINAPI NtSetContextThread( HANDLE handle, const CONTEXT *context )
          frame->rbp    = context->Rbp;
          frame->rip    = context->Rip;
          frame->eflags = context->EFlags;
@@ -181,7 +206,7 @@ index 79d69d11547..3b3c63c9f90 100644
      }
      if (flags & CONTEXT_FLOATING_POINT)
      {
-@@ -1088,16 +1109,16 @@ NTSTATUS WINAPI NtGetContextThread( HANDLE handle, CONTEXT *context )
+@@ -1088,16 +1113,16 @@ NTSTATUS WINAPI NtGetContextThread( HANDLE handle, CONTEXT *context )
          context->Rbp    = frame->rbp;
          context->Rip    = frame->rip;
          context->EFlags = frame->eflags;
@@ -204,7 +229,7 @@ index 79d69d11547..3b3c63c9f90 100644
          context->ContextFlags |= CONTEXT_SEGMENTS;
      }
      if (needed_flags & CONTEXT_FLOATING_POINT)
-@@ -1325,16 +1346,16 @@ NTSTATUS get_thread_wow64_context( HANDLE handle, void *ctx, ULONG size )
+@@ -1325,16 +1350,16 @@ NTSTATUS get_thread_wow64_context( HANDLE handle, void *ctx, ULONG size )
          context->Ebp    = wow_frame->Ebp;
          context->Eip    = wow_frame->Eip;
          context->EFlags = wow_frame->EFlags;
@@ -227,7 +252,7 @@ index 79d69d11547..3b3c63c9f90 100644
          context->ContextFlags |= CONTEXT_I386_SEGMENTS;
      }
      if (needed_flags & CONTEXT_I386_EXTENDED_REGISTERS)
-@@ -2484,11 +2505,11 @@ void DECLSPEC_HIDDEN call_init_thunk( LPTHREAD_START_ROUTINE entry, void *arg, B
+@@ -2484,11 +2509,11 @@ void DECLSPEC_HIDDEN call_init_thunk( LPTHREAD_START_ROUTINE entry, void *arg, B
          wow_context->Esp = get_wow_teb( teb )->Tib.StackBase - 16;
          wow_context->Eip = pLdrSystemDllInitBlock->pRtlUserThreadStart;
          wow_context->SegCs = cs32_sel;
@@ -244,7 +269,7 @@ index 79d69d11547..3b3c63c9f90 100644
          wow_context->EFlags = 0x202;
          wow_context->FloatSave.ControlWord = context.FltSave.ControlWord;
          *(XSAVE_FORMAT *)wow_context->ExtendedRegisters = context.FltSave;
-@@ -2502,8 +2523,6 @@ void DECLSPEC_HIDDEN call_init_thunk( LPTHREAD_START_ROUTINE entry, void *arg, B
+@@ -2502,8 +2527,6 @@ void DECLSPEC_HIDDEN call_init_thunk( LPTHREAD_START_ROUTINE entry, void *arg, B
      memset( frame, 0, sizeof(*frame) );
      NtSetContextThread( GetCurrentThread(), ctx );
  
@@ -253,3 +278,82 @@ index 79d69d11547..3b3c63c9f90 100644
      frame->rsp = (ULONG64)ctx - 8;
      frame->rip = (ULONG64)pLdrInitializeThunk;
      frame->rcx = (ULONG64)ctx;
+@@ -2586,7 +2609,7 @@ __ASM_GLOBAL_FUNC( __wine_syscall_dispatcher,
+                    __ASM_CFI(".cfi_adjust_cfa_offset 8\n\t")
+                    "popq 0x80(%rcx)\n\t"
+                    __ASM_CFI(".cfi_adjust_cfa_offset -8\n\t")
+-                   "movl $0,0xb4(%rcx)\n\t"        /* frame->restore_flags */
++                   "movl $0,0x94(%rcx)\n\t"        /* frame->restore_flags */
+                    ".globl " __ASM_NAME("__wine_syscall_dispatcher_prolog_end") "\n"
+                    __ASM_NAME("__wine_syscall_dispatcher_prolog_end") ":\n\t"
+                    "movq %rax,0x00(%rcx)\n\t"
+@@ -2606,10 +2629,14 @@ __ASM_GLOBAL_FUNC( __wine_syscall_dispatcher,
+                    "movq %r15,0x68(%rcx)\n\t"
+                    __ASM_CFI_REG_IS_AT2(r15, rcx, 0xe8, 0x00)
+                    "movw %cs,0x78(%rcx)\n\t"
++                   "movw %ds,0x7a(%rcx)\n\t"
++                   "movw %es,0x7c(%rcx)\n\t"
++                   "movw %fs,0x7e(%rcx)\n\t"
+                    "movq %rsp,0x88(%rcx)\n\t"
+                    __ASM_CFI_CFA_IS_AT2(rcx, 0x88, 0x01)
+                    __ASM_CFI_REG_IS_AT2(rsp, rcx, 0x88, 0x01)
+                    "movw %ss,0x90(%rcx)\n\t"
++                   "movw %gs,0x92(%rcx)\n\t"
+                    "movq %rbp,0x98(%rcx)\n\t"
+                    __ASM_CFI_REG_IS_AT2(rbp, rcx, 0x98, 0x01)
+                    /* Legends of Runeterra hooks the first system call return instruction, and
+@@ -2701,11 +2728,11 @@ __ASM_GLOBAL_FUNC( __wine_syscall_dispatcher,
+                    /* $rcx is now pointing to "frame" again */
+                    __ASM_CFI(".cfi_restore_state\n")
+                    __ASM_LOCAL_LABEL("__wine_syscall_dispatcher_return") ":\n\t"
+-                   "movl 0xb4(%rcx),%edx\n\t"      /* frame->restore_flags */
++                   "movl 0x94(%rcx),%edx\n\t"  /* frame->restore_flags */
+ #ifdef __linux__
+                    "testl $12,%r14d\n\t"           /* SYSCALL_HAVE_PTHREAD_TEB | SYSCALL_HAVE_WRFSGSBASE */
+                    "jz 1f\n\t"
+-                   "movw %gs:0x338,%fs\n"          /* amd64_thread_data()->fs */
++                   "movw 0x7e(%rcx),%fs\n"
+                    "1:\n\t"
+ #endif
+                    "testl $0x48,%edx\n\t"          /* CONTEXT_FLOATING_POINT | CONTEXT_XSTATE */
+@@ -2728,7 +2755,7 @@ __ASM_GLOBAL_FUNC( __wine_syscall_dispatcher,
+                    "xorl %edx,%edx\n\t"
+                    "xrstor64 0xc0(%rcx)\n\t"
+                    "movq %r11,%rax\n\t"
+-                   "movl 0xb4(%rcx),%edx\n\t"      /* frame->restore_flags */
++                   "movl 0x94(%rcx),%edx\n\t"
+                    "jmp 4f\n"
+                    "3:\tfxrstor64 0xc0(%rcx)\n"
+                    "4:\tmovq 0x98(%rcx),%rbp\n\t"
+@@ -2822,7 +2849,7 @@ __ASM_GLOBAL_FUNC( __wine_unix_call_dispatcher,
+                    "popq 0x70(%rcx)\n\t"           /* frame->rip */
+                    __ASM_CFI(".cfi_adjust_cfa_offset -8\n\t")
+                    __ASM_CFI_REG_IS_AT2(rip, rcx, 0xf0,0x00)
+-                   "movl $0,0xb4(%rcx)\n\t"        /* frame->restore_flags */
++                   "movl $0,0x94(%rcx)\n\t"        /* frame->restore_flags */
+                    ".globl " __ASM_NAME("__wine_unix_call_dispatcher_prolog_end") "\n"
+                    __ASM_NAME("__wine_unix_call_dispatcher_prolog_end") ":\n\t"
+                    "movq %rbx,0x08(%rcx)\n\t"
+@@ -2858,6 +2885,7 @@ __ASM_GLOBAL_FUNC( __wine_unix_call_dispatcher,
+ #ifdef __linux__
+                    "testl $12,%r14d\n\t"           /* SYSCALL_HAVE_PTHREAD_TEB | SYSCALL_HAVE_WRFSGSBASE */
+                    "jz 2f\n\t"
++                   "movw %fs,0x7e(%rcx)\n\t"
+                    "movq %gs:0x330,%rsi\n\t"       /* amd64_thread_data()->pthread_teb */
+                    "testl $8,%r14d\n\t"            /* SYSCALL_HAVE_WRFSGSBASE */
+                    "jz 1f\n\t"
+@@ -2884,12 +2912,12 @@ __ASM_GLOBAL_FUNC( __wine_unix_call_dispatcher,
+                    "movdqa 0x230(%rcx),%xmm13\n\t"
+                    "movdqa 0x240(%rcx),%xmm14\n\t"
+                    "movdqa 0x250(%rcx),%xmm15\n\t"
+-                   "testl $0xffff,0xb4(%rcx)\n\t"  /* frame->restore_flags */
++                   "testl $0xffff,0x94(%rcx)\n\t"  /* frame->restore_flags */
+                    "jnz " __ASM_LOCAL_LABEL("__wine_syscall_dispatcher_return") "\n\t"
+ #ifdef __linux__
+                    "testl $12,%r14d\n\t"           /* SYSCALL_HAVE_PTHREAD_TEB | SYSCALL_HAVE_WRFSGSBASE */
+                    "jz 1f\n\t"
+-                   "movw %gs:0x338,%fs\n"          /* amd64_thread_data()->fs */
++                   "movw 0x7e(%rcx),%fs\n"
+                    "1:\n\t"
+ #endif
+                    "movq 0x60(%rcx),%r14\n\t"
