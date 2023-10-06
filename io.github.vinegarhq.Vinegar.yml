@@ -111,7 +111,7 @@ modules:
     sources:
       - type: archive
         url: https://github.com/vinegarhq/vinegar/releases/download/v1.4.5/vinegar-v1.4.5.tar.xz
-        sha256: 8fc9415604d2a249618711e844984b422e866b14823c47907fffb1071330c5ae 
+        sha256: 8fc9415604d2a249618711e844984b422e866b14823c47907fffb1071330c5ae
       - type: file
         path: io.github.vinegarhq.Vinegar.metainfo.xml
       - type: file
@@ -178,8 +178,8 @@ modules:
           - udevadm hwdb --update --usr
         sources: &eudev-sources
           - type: archive
-            url: https://github.com/eudev-project/eudev/releases/download/v3.2.12/eudev-3.2.12.tar.gz
-            sha256: ccdd64ec3c381d3c3ed0e99d2e70d1f62988c7763de89ca7bdffafa5eacb9ad8
+            url: https://github.com/eudev-project/eudev/releases/download/v3.2.14/eudev-3.2.14.tar.gz
+            sha256: 8da4319102f24abbf7fff5ce9c416af848df163b29590e666d334cc1927f006f
             x-checker-data:
               type: json
               url: https://api.github.com/repos/gentoo/eudev/releases/latest
