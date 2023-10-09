@@ -17,7 +17,7 @@ finish-args:
   - --share=network
   - --socket=x11 # Will be removed or replaced with fallback-x11 once Wine is improved
   - --share=ipc
-  - --socket=wayland
+  #- --socket=wayland
   #- --device=dri # Uncomment if --device=all is removed/commented to fix graphics issues
   - --allow=devel # Necessary for VMProtect to function.
   - --socket=pulseaudio
