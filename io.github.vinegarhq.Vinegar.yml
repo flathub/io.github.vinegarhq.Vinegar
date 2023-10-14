@@ -262,8 +262,8 @@ modules:
           - patches/wine/segregrevert.patch
       - type: git
         url: https://gitlab.winehq.org/wine/wine-staging.git
-        commit: 2827fd672724b2bd50238aea381c74a241bc88c1
-        tag: v8.17.1
+        commit: a5625909787122a39f2795a9ebf553a66c6f0a92
+        tag: v8.18
       # REMOVE BELOW PATCH AFTER MERGE INTO 8.16
       #- type: patch
       #  paths:
