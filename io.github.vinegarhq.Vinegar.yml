@@ -268,9 +268,9 @@ modules:
       #- type: patch
       #  paths:
       #    - patches/wine/fixcalculation.patch
-      #- type: patch
-      #  paths:
-      #    - patches/wine/loader-prefer-winedllpath.patch
+      - type: patch
+        paths:
+          - patches/wine/loader-prefer-winedllpath.patch
       - type: shell
         commands:
           - staging/patchinstall.py --destdir=. --all
