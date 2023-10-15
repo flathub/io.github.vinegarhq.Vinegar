@@ -110,8 +110,8 @@ modules:
       - install -Dm644 io.github.vinegarhq.Vinegar.png /app/share/icons/hicolor/128x128/apps/io.github.vinegarhq.Vinegar.png
     sources:
       - type: archive
-        url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.0/vinegar-v1.5.0.tar.xz
-        sha256: 858582470d5f269c87584dcab51869b70ebfc974ac6cd583b487eb462f96370c
+        url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.2/vinegar-v1.5.2.tar.xz
+        sha256: b7651d9facccf190cfc8d1f12ff0e15f9501ff3fa7c53226dbae6d804001951b
       - type: file
         path: io.github.vinegarhq.Vinegar.metainfo.xml
       - type: file
@@ -253,8 +253,8 @@ modules:
       - INSTALL_PROGRAM_FLAGS=-s
     sources: &wine-sources
       - type: archive
-        url: https://dl.winehq.org/wine/source/8.x/wine-8.17.tar.xz
-        sha256: f01785bd3162c74e65deb13aa0add711e37c484454719bedd0e8c2b1a3469b7e
+        url: https://dl.winehq.org/wine/source/8.x/wine-8.18.tar.xz
+        sha256: 30faef14acf70fd5f739d2fece3432839f1f7dd2d3624bcc3662c3b1b83260db
         x-addons-url: &wine-addons-url >-
           https://source.winehq.org/git/wine.git/blob_plain/refs/heads/stable:/dlls/appwiz.cpl/addons.c
       - type: patch
@@ -262,8 +262,8 @@ modules:
           - patches/wine/segregrevert.patch
       - type: git
         url: https://gitlab.winehq.org/wine/wine-staging.git
-        commit: 2827fd672724b2bd50238aea381c74a241bc88c1
-        tag: v8.17.1
+        commit: a5625909787122a39f2795a9ebf553a66c6f0a92
+        tag: v8.18
       # REMOVE BELOW PATCH AFTER MERGE INTO 8.16
       #- type: patch
       #  paths:
