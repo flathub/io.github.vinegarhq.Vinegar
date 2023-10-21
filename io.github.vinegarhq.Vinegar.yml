@@ -112,6 +112,11 @@ modules:
       - type: archive
         url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.3/vinegar-v1.5.3.tar.xz
         sha256: 25fadff5c46ce129818dad5ed32f1932088a6942bdf0c715be638667d7aaa9eb
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/vinegarhq/vinegar/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name=="vinegar-\($version).tar.xz") | .browser_download_url
       - type: file
         path: io.github.vinegarhq.Vinegar.metainfo.xml
       - type: file
@@ -257,6 +262,9 @@ modules:
         sha256: 30faef14acf70fd5f739d2fece3432839f1f7dd2d3624bcc3662c3b1b83260db
         x-addons-url: &wine-addons-url >-
           https://source.winehq.org/git/wine.git/blob_plain/refs/heads/stable:/dlls/appwiz.cpl/addons.c
+          #- type: patch
+          #paths:
+          #- patches/wine/modMsgBoxA.patch
       - type: patch
         paths:
           - patches/wine/segregrevert.patch
