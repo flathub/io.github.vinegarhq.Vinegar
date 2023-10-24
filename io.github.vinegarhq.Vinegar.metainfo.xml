@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright [2022] [Vinegar Development] -->
 <component type="desktop-application">
 	<id>io.github.vinegarhq.Vinegar</id>
 	<metadata_license>CC0-1.0</metadata_license>
+	<project_license>GPL-3.0-only</project_license>
 	<name>Vinegar</name>
-	<summary>A wrapper for Roblox with many advanced optimization features.</summary>
+	<summary>A feature-packed small and fast bootstrapper for Roblox</summary>
 	<description>
-		<p>Vinegar is a wrapper for Roblox that includes various optimization and ease-of-use features, including the RCO FFlag set, fast launching, and more.</p>
+		<p>Vinegar is a fast and robust bootstrapper for Roblox that has many ease-of-use features.</p>
 	</description>
+	<developer_name>VinegarHQ</developer_name>
 	<categories>
 		<category>Game</category>
 	</categories>
-	<url type="homepage">https://github.com/vinegarhq/vinegar</url>
+	<url type="homepage">https://vinegarhq.org</url>
+	<url type="help">https://vinegarhq.org</url>
+	<url type="contribute">https://github.com/vinegarhq/vinegar</url>
 	<url type="bugtracker">https://github.com/vinegarhq/vinegar/issues</url>
-	<project_license>GPL-3.0-only</project_license>
-	<developer_name>Vinegar Development</developer_name>
 	<screenshots>
 	  <screenshot type="default">
 	    <image type="source" width="1116" height="606">https://vinegarhq.github.io/image.png</image>
@@ -24,7 +25,11 @@
 	<releases>
 		<release version="1.5.4" date="2023-10-13">
 			<description>
-				<p>Update to 1.5.4</p>
+				<ul>
+					<li>Added Discord rich presence with BloxstrapRPC</li>
+					<li>Fix Studio's bold fonts</li>
+					<li>Merged Roblox's logs with Vinegar</li>
+				</ul>
 			</description>
 		</release>
 	</releases>
