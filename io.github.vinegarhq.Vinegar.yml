@@ -27,7 +27,8 @@ finish-args:
   - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib32/gstreamer-1.0:/app/lib/gstreamer-1.0:/usr/lib/i386-linux-gnu/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
   - --env=EDITOR=nano
   - --env=PATH=/app/bin:/app/utils/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin/:/usr/bin:/usr/lib/extensions/vulkan/OBSVkCapture/bin/:/usr/lib/extensions/vulkan/gamescope/bin/
-
+  - --filesystem=$XDG_RUNTIME_DIR/app/com.discordapp.Discord/discord-ipc-0
+  - --filesystem=$XDG_RUNTIME_DIR/run/user/1000/app/com.discordapp.Discord/discord-ipc-0 
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
@@ -285,27 +286,6 @@ modules:
       - type: patch
         paths:
           - patches/wine/childwindow.patch
-
-  # 32-bit compatibility build
-
-  - name: wine-32bit
-    only-arches:
-      - x86_64
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-      config-opts:
-        - --bindir=${FLATPAK_DEST}/bin32
-        - --with-mingw=ccache i686-w64-mingw32-gcc
-      env:
-        LIBDIR: lib32
-    config-opts: *wine-config-opts
-    make-install-args: *wine-make-install-args
-    post-install:
-      - mv ${FLATPAK_DEST}/bin32/wine{,-preloader} ${FLATPAK_DEST}/bin/
-    sources: *wine-sources
-    cleanup:
-      - /bin32
 
   # Modified from org.winehq.Wine
   - name: wine-mono
