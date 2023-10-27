@@ -290,6 +290,8 @@ modules:
       - type: patch
         paths:
           - patches/wine/childwindow.patch
+    cleanup-commands:
+      - 'ln -s /app/bin/wine64 /app/bin/wine'
 
   # Modified from org.winehq.Wine
   - name: wine-mono
