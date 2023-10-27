@@ -27,8 +27,8 @@ finish-args:
   - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib32/gstreamer-1.0:/app/lib/gstreamer-1.0:/usr/lib/i386-linux-gnu/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
   - --env=EDITOR=nano
   - --env=PATH=/app/bin:/app/utils/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin/:/usr/bin:/usr/lib/extensions/vulkan/OBSVkCapture/bin/:/usr/lib/extensions/vulkan/gamescope/bin/
-  - --filesystem=$XDG_RUNTIME_DIR/app/com.discordapp.Discord/discord-ipc-0
-  - --filesystem=$XDG_RUNTIME_DIR/run/user/1000/app/com.discordapp.Discord/discord-ipc-0 
+  - --filesystem=xdg-run/app/com.discordapp.Discord:create 
+  - --filesystem=xdg-run/app/com.discordapp.Discord/discord-ipc-0
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
@@ -97,6 +97,10 @@ modules:
       - mkdir -p /app/lib32
       - mkdir -p /app/lib/i386-linux-gnu
       - install -Dm644 ld.so.conf -t /app/etc/
+      - |
+        for i in {0..9}; do
+          test -S $XDG_RUNTIME_DIR/discord-ipc-$i || ln -sf {app/com.discordapp.Discord,$XDG_RUNTIME_DIR}/discord-ipc-$1;
+        done  
     sources:
       - type: file
         path: ld.so.conf
