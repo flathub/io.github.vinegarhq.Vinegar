@@ -27,7 +27,8 @@ finish-args:
   - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib32/gstreamer-1.0:/app/lib/gstreamer-1.0:/usr/lib/i386-linux-gnu/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
   - --env=EDITOR=nano
   - --env=PATH=/app/bin:/app/utils/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin/:/usr/bin:/usr/lib/extensions/vulkan/OBSVkCapture/bin/:/usr/lib/extensions/vulkan/gamescope/bin/
-
+  - --filesystem=xdg-run/app/com.discordapp.Discord:create 
+  - --filesystem=xdg-run/app/com.discordapp.Discord/discord-ipc-0
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
@@ -96,6 +97,10 @@ modules:
       - mkdir -p /app/lib32
       - mkdir -p /app/lib/i386-linux-gnu
       - install -Dm644 ld.so.conf -t /app/etc/
+      - |
+        for i in {0..9}; do
+          test -S $XDG_RUNTIME_DIR/discord-ipc-$i || ln -sf {app/com.discordapp.Discord,$XDG_RUNTIME_DIR}/discord-ipc-$1;
+        done  
     sources:
       - type: file
         path: ld.so.conf
@@ -193,18 +198,18 @@ modules:
               timestamp-query: .published_at
               url-query: .assets[] | select(.name=="eudev-\($version).tar.gz") | .browser_download_url
 
-  - name: libusb-32bit
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-    sources: *libusb-sources
-    modules:
-      - name: eudev-32bit
-        build-options:
-          arch:
-            x86_64: *compat_i386_opts
-        cleanup: *eudev-cleanup
-        sources: *eudev-sources
+#  - name: libusb-32bit
+#    build-options:
+#      arch:
+#        x86_64: *compat_i386_opts
+#    sources: *libusb-sources
+#    modules:
+#      - name: eudev-32bit
+#        build-options:
+#          arch:
+#            x86_64: *compat_i386_opts
+#        cleanup: *eudev-cleanup
+#        sources: *eudev-sources
 
 
   - name: vkd3d
@@ -229,11 +234,11 @@ modules:
               type: git
               tag-pattern: ^sdk-([\d.]+)$
 
-  - name: vkd3d-32bit
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-      sources: *vkd3d-sources
+#  - name: vkd3d-32bit
+#    build-options:
+#      arch:
+#        x86_64: *compat_i386_opts
+#      sources: *vkd3d-sources
 
   - name: wine
     build-options:
@@ -286,26 +291,10 @@ modules:
         paths:
           - patches/wine/childwindow.patch
 
-  # 32-bit compatibility build
-
-  - name: wine-32bit
-    only-arches:
-      - x86_64
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-      config-opts:
-        - --bindir=${FLATPAK_DEST}/bin32
-        - --with-mingw=ccache i686-w64-mingw32-gcc
-      env:
-        LIBDIR: lib32
-    config-opts: *wine-config-opts
-    make-install-args: *wine-make-install-args
-    post-install:
-      - mv ${FLATPAK_DEST}/bin32/wine{,-preloader} ${FLATPAK_DEST}/bin/
-    sources: *wine-sources
-    cleanup:
-      - /bin32
+  - name: wine64to32
+    buildsystem: simple
+    build-commands:
+      - ln -s /app/bin/wine64 /app/bin/wine
 
   # Modified from org.winehq.Wine
   - name: wine-mono
