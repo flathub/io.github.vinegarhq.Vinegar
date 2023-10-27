@@ -198,18 +198,18 @@ modules:
               timestamp-query: .published_at
               url-query: .assets[] | select(.name=="eudev-\($version).tar.gz") | .browser_download_url
 
-  - name: libusb-32bit
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-    sources: *libusb-sources
-    modules:
-      - name: eudev-32bit
-        build-options:
-          arch:
-            x86_64: *compat_i386_opts
-        cleanup: *eudev-cleanup
-        sources: *eudev-sources
+#  - name: libusb-32bit
+#    build-options:
+#      arch:
+#        x86_64: *compat_i386_opts
+#    sources: *libusb-sources
+#    modules:
+#      - name: eudev-32bit
+#        build-options:
+#          arch:
+#            x86_64: *compat_i386_opts
+#        cleanup: *eudev-cleanup
+#        sources: *eudev-sources
 
 
   - name: vkd3d
@@ -234,11 +234,11 @@ modules:
               type: git
               tag-pattern: ^sdk-([\d.]+)$
 
-  - name: vkd3d-32bit
-    build-options:
-      arch:
-        x86_64: *compat_i386_opts
-      sources: *vkd3d-sources
+#  - name: vkd3d-32bit
+#    build-options:
+#      arch:
+#        x86_64: *compat_i386_opts
+#      sources: *vkd3d-sources
 
   - name: wine
     build-options:
