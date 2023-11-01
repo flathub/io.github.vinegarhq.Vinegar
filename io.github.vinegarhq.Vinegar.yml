@@ -27,7 +27,7 @@ finish-args:
   - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib32/gstreamer-1.0:/app/lib/gstreamer-1.0:/usr/lib/i386-linux-gnu/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
   - --env=EDITOR=nano
   - --env=PATH=/app/bin:/app/utils/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin/:/usr/bin:/usr/lib/extensions/vulkan/OBSVkCapture/bin/:/usr/lib/extensions/vulkan/gamescope/bin/
-  - --filesystem=xdg-run/app/com.discordapp.Discord:create 
+  - --filesystem=xdg-run/app/com.discordapp.Discord:create
   - --filesystem=xdg-run/app/com.discordapp.Discord/discord-ipc-0
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
@@ -115,8 +115,8 @@ modules:
       - install -Dm644 io.github.vinegarhq.Vinegar.png /app/share/icons/hicolor/128x128/apps/io.github.vinegarhq.Vinegar.png
     sources:
       - type: archive
-        url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.4/vinegar-v1.5.4.tar.xz
-        sha256: 1b92ed9dbbd81ad160a4aa2a78907d186145eb9669c6c963ba705b94b4da796c
+        url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.6/vinegar-v1.5.6.tar.xz
+        sha256: c4ad98ab753cf897f711c8425555a1de8777d338dcc3a67be042e856e1de8e7e
         x-checker-data:
           type: json
           url: https://api.github.com/repos/vinegarhq/vinegar/releases/latest
@@ -166,7 +166,7 @@ modules:
 # Multilib deps
 
   - name: libusb
-    sources: &libusb-sources
+    sources:
       - type: archive
         url: https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2
         sha256: 12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5
@@ -180,13 +180,13 @@ modules:
     modules:
 
       - name: eudev
-        cleanup: &eudev-cleanup
+        cleanup:
           - /bin
           - /sbin
           - /lib*/udev
         post-install:
           - udevadm hwdb --update --usr
-        sources: &eudev-sources
+        sources:
           - type: archive
             url: https://github.com/eudev-project/eudev/releases/download/v3.2.14/eudev-3.2.14.tar.gz
             sha256: 8da4319102f24abbf7fff5ce9c416af848df163b29590e666d334cc1927f006f
@@ -213,7 +213,7 @@ modules:
 
 
   - name: vkd3d
-    sources: &vkd3d-sources
+    sources:
       - type: archive
         url: https://dl.winehq.org/vkd3d/source/vkd3d-1.8.tar.xz
         sha256: e0cec19cc9535715c72ec3a16cdec29dc14d5ccec73526387b5843cf75628ac5
@@ -250,18 +250,18 @@ modules:
           libdir: /app/lib
       env:
         LIBDIR: lib
-    config-opts: &wine-config-opts
+    config-opts:
       - --disable-win16
       - --disable-tests
       - --with-x
       - --with-pulse
       - --with-dbus
       - --without-oss
-    make-install-args: &wine-make-install-args
+    make-install-args:
       - LDCONFIG=/bin/true
       - UPDATE_DESKTOP_DATABASE=/bin/true
       - INSTALL_PROGRAM_FLAGS=-s
-    sources: &wine-sources
+    sources:
       - type: archive
         url: https://dl.winehq.org/wine/source/8.x/wine-8.18.tar.xz
         sha256: 30faef14acf70fd5f739d2fece3432839f1f7dd2d3624bcc3662c3b1b83260db
