@@ -115,8 +115,8 @@ modules:
       - install -Dm755 discordrpc-wrapper.sh -t /app/share/patches
     sources:
       - type: archive
-        url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.6/vinegar-v1.5.6.tar.xz
-        sha256: c4ad98ab753cf897f711c8425555a1de8777d338dcc3a67be042e856e1de8e7e
+        url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.7/vinegar-v1.5.7.tar.xz
+        sha256: fd0f1e24bdf00033c8affadf27e653f89e44db94f7ef42b714e34fd399473970
         x-checker-data:
           type: json
           url: https://api.github.com/repos/vinegarhq/vinegar/releases/latest
