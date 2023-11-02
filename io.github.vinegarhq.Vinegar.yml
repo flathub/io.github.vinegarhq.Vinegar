@@ -96,10 +96,6 @@ modules:
       - mkdir -p /app/lib32
       - mkdir -p /app/lib/i386-linux-gnu
       - install -Dm644 ld.so.conf -t /app/etc/
-      - |
-        for i in {0..9}; do
-          test -S $XDG_RUNTIME_DIR/discord-ipc-$i || ln -sf {app/com.discordapp.Discord,$XDG_RUNTIME_DIR}/discord-ipc-$i;
-        done  
     sources:
       - type: file
         path: ld.so.conf
