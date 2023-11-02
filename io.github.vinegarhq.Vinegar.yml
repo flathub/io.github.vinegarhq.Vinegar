@@ -11,7 +11,7 @@ sdk-extensions:
   - org.freedesktop.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
   - org.freedesktop.Sdk.Extension.mingw-w64
-command: vinegar
+command: /app/share/patches/discordrpc-wrapper.sh
 
 finish-args:
   - --share=network
@@ -112,6 +112,7 @@ modules:
       - install -Dm644 io.github.vinegarhq.Vinegar.metainfo.xml -t /app/share/metainfo
       - install -Dm644 catglass.svg /app/share/icons/hicolor/scalable/apps/io.github.vinegarhq.Vinegar.svg
       - install -Dm644 io.github.vinegarhq.Vinegar.png /app/share/icons/hicolor/128x128/apps/io.github.vinegarhq.Vinegar.png
+      - install -Dm755 discordrpc-wrapper.sh -t /app/share/patches
     sources:
       - type: archive
         url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.6/vinegar-v1.5.6.tar.xz
@@ -129,6 +130,8 @@ modules:
         path: io.github.vinegarhq.Vinegar.png
       - type: file
         path: patches/io.github.vinegarhq.Vinegar.desktop
+      - type: file
+        path: patches/discordrpc-wrapper.sh
   - name: gamemode
     buildsystem: meson
     config-opts:
