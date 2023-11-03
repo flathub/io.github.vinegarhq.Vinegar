@@ -114,8 +114,8 @@ modules:
       - install -Dm644 io.github.vinegarhq.Vinegar.png /app/share/icons/hicolor/128x128/apps/io.github.vinegarhq.Vinegar.png
     sources:
       - type: archive
-        url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.7/vinegar-v1.5.7.tar.xz
-        sha256: fd0f1e24bdf00033c8affadf27e653f89e44db94f7ef42b714e34fd399473970
+        url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.8/vinegar-v1.5.8.tar.xz
+        sha256: 6bf2c9ecc62605e515cbd2fc0cef1ca08effa934be58ea72b4047cc44b7aa4bf
         x-checker-data:
           type: json
           url: https://api.github.com/repos/vinegarhq/vinegar/releases/latest
