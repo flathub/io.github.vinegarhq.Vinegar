@@ -11,7 +11,7 @@ sdk-extensions:
   - org.freedesktop.Sdk.Compat.i386
   - org.freedesktop.Sdk.Extension.toolchain-i386
   - org.freedesktop.Sdk.Extension.mingw-w64
-command: /app/bin/discordrpc-wrapper.sh
+command: /app/bin/vinegar
 
 finish-args:
   - --share=network
@@ -109,6 +109,8 @@ modules:
       - install -Dm644 catglass.svg /app/share/icons/hicolor/scalable/apps/io.github.vinegarhq.Vinegar.svg
       - install -Dm644 io.github.vinegarhq.Vinegar.png /app/share/icons/hicolor/128x128/apps/io.github.vinegarhq.Vinegar.png
       - install -Dm755 discordrpc-wrapper.sh -t /app/bin
+      - mv /app/bin/vinegar /app/bin/vinegar-binary
+      - mv /app/bin/discordrpc-wrapper.sh /app/bin/vinegar
     sources:
       - type: archive
         url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.7/vinegar-v1.5.7.tar.xz
