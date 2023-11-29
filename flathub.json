@@ -1,3 +1,5 @@
 {
-	"only-arches": ["x86_64"]
+	"only-arches": ["x86_64"],
+	"end-of-life": "This application has been renamed to org.vinegarhq.Vinegar",
+	"end-of-life-rebase": "org.vinegarhq.Vinegar"
 }
