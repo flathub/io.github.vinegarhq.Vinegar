@@ -114,8 +114,8 @@ modules:
       - install -Dm644 io.github.vinegarhq.Vinegar.png /app/share/icons/hicolor/128x128/apps/io.github.vinegarhq.Vinegar.png
     sources:
       - type: archive
-        url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.8/vinegar-v1.5.8.tar.xz
-        sha256: 6bf2c9ecc62605e515cbd2fc0cef1ca08effa934be58ea72b4047cc44b7aa4bf
+        url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.9/vinegar-v1.5.9.tar.xz
+        sha256: b241e371d29d05568bd720820e3d83300516c476760b917057c45e0ab489a89e
         x-checker-data:
           type: json
           url: https://api.github.com/repos/vinegarhq/vinegar/releases/latest
@@ -137,8 +137,8 @@ modules:
     sources: &gamemode-sources
       - type: git
         url: https://github.com/FeralInteractive/gamemode
-        commit: 4dc99dff76218718763a6b07fc1900fa6d1dafd9
-        tag: '1.7'
+        commit: bb403740671551c2acbbb5c00c84689914966ba2
+        tag: '1.8'
         x-checker-data:
           type: json
           url: https://api.github.com/repos/FeralInteractive/gamemode/releases/latest
