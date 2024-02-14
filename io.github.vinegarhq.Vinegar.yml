@@ -114,8 +114,8 @@ modules:
       - install -Dm644 io.github.vinegarhq.Vinegar.png /app/share/icons/hicolor/128x128/apps/io.github.vinegarhq.Vinegar.png
     sources:
       - type: archive
-        url: https://github.com/vinegarhq/vinegar/releases/download/v1.5.8/vinegar-v1.5.8.tar.xz
-        sha256: 6bf2c9ecc62605e515cbd2fc0cef1ca08effa934be58ea72b4047cc44b7aa4bf
+        url: https://github.com/vinegarhq/vinegar/releases/download/v1.7.3/vinegar-v1.7.3.tar.xz
+        sha256: 6d8cf5f4fea17560c7cca601ad4da6ed305318e27d00d8e9589d0a9407632aeb
         x-checker-data:
           type: json
           url: https://api.github.com/repos/vinegarhq/vinegar/releases/latest
@@ -137,8 +137,8 @@ modules:
     sources: &gamemode-sources
       - type: git
         url: https://github.com/FeralInteractive/gamemode
-        commit: 4dc99dff76218718763a6b07fc1900fa6d1dafd9
-        tag: '1.7'
+        commit: 5180d89e66830d87f69687b95fb86f622552b94b
+        tag: 1.8.1
         x-checker-data:
           type: json
           url: https://api.github.com/repos/FeralInteractive/gamemode/releases/latest
@@ -167,8 +167,8 @@ modules:
   - name: libusb
     sources:
       - type: archive
-        url: https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2
-        sha256: 12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5
+        url: https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2
+        sha256: ffaa41d741a8a3bee244ac8e54a72ea05bf2879663c098c82fc5757853441575
         x-checker-data:
           type: json
           url: https://api.github.com/repos/libusb/libusb/releases/latest
